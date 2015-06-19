@@ -1,0 +1,57 @@
+/* File generated with Shader Minifier 1.1.4
+ * http://www.ctrl-alt-test.fr
+ */
+#ifndef SHADER_CODE_H_
+# define SHADER_CODE_H_
+
+const char *shader_glsl =
+ "uint v;"
+ "float m()"
+ "{"
+   "return v^=v<<1,v^=v>>3,v^=v<<10,float(v%10000)/10000.;"
+ "}"
+ "float m(vec3 m)"
+ "{"
+   "vec3 v=abs(m*=.5)-.5;"
+   "m+=.5;"
+   "float y=max(max(v.x,v.y),v.z),x=1.;"
+   "for(int f=1;f<8;f++)"
+     "x*=3.,v=.5-abs(mod(m*x,3.)-1.5),y=max(min(max(v.x,v.z),min(max(v.x,v.y),max(v.y,v.z)))/x,y);"
+   "return y*2.;"
+ "}"
+ "void main()"
+ "{"
+   "vec3 y=vec3(0.);"
+   "vec2 f=vec2(.0001,0.),i=gl_FragCoord.xy;"
+   "v=1000*uint(i.x)+uint(i.y);"
+   "for(int r=0;r<100;r++)"
+     "{"
+       "vec3 n=vec3(2.),x=vec3(0.,0.,-1.),u=vec3((i+1.5*vec2(m(),m()))/1080.-vec2(1.77778/2,.5),1.),d=x+1.5*u;"
+       "x.xy+=vec2(m(),m())*.01;"
+       "u=normalize(d-x);"
+       "for(int b=0;b<5;b++)"
+         "{"
+           "float z=50.,e=0.;"
+           "for(int a=0;a<50;a++)"
+             "{"
+               "float k=m(d=x+u*e);"
+               "e+=k;"
+               "if(e>z||abs(k)<f.x)"
+                 "break;"
+             "}"
+           "if(e>=z)"
+             "{"
+               "y+=n+vec3(-.5,0.,.5)*u.y;"
+               "break;"
+             "}"
+           "vec3 k=normalize(vec3(m(d+f.xyy)-m(d-f.xyy),m(d+f.yxy)-m(d-f.yxy),m(d+f.yyx)-m(d-f.yyx)));"
+           "x=d+.001*k;"
+           "u=normalize(vec3(m(),m(),m())*2.-1.);"
+           "u=dot(u,k)<0.?-u:u;"
+           "n*=dot(u,k);"
+         "}"
+     "}"
+   "gl_FragColor=sqrt(y.xyzz/100.);"
+ "}";
+
+#endif // SHADER_CODE_H_

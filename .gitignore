@@ -1,0 +1,10 @@
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sdf
+*.opensdf
+
+Release
+Debug
+Crinkler

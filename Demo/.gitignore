@@ -1,0 +1,9 @@
+/Crinkler
+/Debug
+/Release
+
+# Clinkler logs
+/*.html
+
+# this file is generated with shader_minifier
+shader_code.h
